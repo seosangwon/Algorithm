@@ -29,5 +29,3 @@ for _ in range(n):
     start=0
     end=len(data)-1
     print(solutions(data,start,end,0))
-
-
