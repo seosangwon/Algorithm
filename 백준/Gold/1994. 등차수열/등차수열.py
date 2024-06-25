@@ -1,27 +1,23 @@
-def longest_arithmetic_subsequence(nums):
-    if not nums:
-        return 0
+N=int(input())
+nums=[int(input().strip()) for _ in range(N)]
 
-    nums.sort()
-    n = len(nums)
-    dp = [{} for _ in range(n)]
-    max_length = 1
+nums.sort() # 정렬
+dp=[{} for _ in range(N)] # 각 nums별로 해시를 저장할 dp 테이블 생성
+answer=1
 
-    for i in range(n):
-        for j in range(i):
-            diff = nums[i] - nums[j]
-            if diff in dp[j]:
-                dp[i][diff] = dp[j][diff] + 1
-            else:
-                dp[i][diff] = 2
-            max_length = max(max_length, dp[i][diff])
+for i in range(N): # 전체 순회 탐색
+    for j in range(i): # i번까지
+        diff=nums[i]-nums[j] # 차이 값
+        if diff in dp[j]: # 차이값이 해시에 있으면
+            dp[i][diff]=dp[j][diff]+1
+        else: # 없으면 2로 초기화
+            dp[i][diff]=2
+        answer=max(answer,dp[i][diff])
+    #print(i, dp)
 
-    return max_length
+#print(dp)
+print(answer)
 
 
-# 입력
-N = int(input().strip())
-nums = [int(input().strip()) for _ in range(N)]
 
-# 출력
-print(longest_arithmetic_subsequence(nums))
+
