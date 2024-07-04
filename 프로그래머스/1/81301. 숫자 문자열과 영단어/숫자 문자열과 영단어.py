@@ -1,19 +1,20 @@
 def solution(s):
-    words=["zero","one","two","three","four","five","six","seven","eight","nine"]
-    check=""
-    result=[]
-    for i in s:
-        if "0"<=i<="9":
-            result.append(i)
-        else:
-            check+=i
-            if check in words:
-                value=words.index(check)
-                result.append(str(value))
-                check=""
+    answer = ''
+    hash_map={'zero':'0','one':'1' , 'two':'2', 'three':'3','four':'4','five':'5','six':'6','seven':'7','eight':'8','nine':'9'}
+    
+    string_=""
     
     
+    for ch in s:
+        if not ('0'<=ch<='9'): # 숫자가 아니면은
+            string_+=ch
+            if string_ in hash_map.keys(): # key value를 찾아주자 
+                answer+=hash_map[string_]
+                string_='' # 찾았으면은 string은 다시 초기화 
+        
+        else: # 숫자 이면은 answer에 더해준다
+            answer+=ch
+        
+
     
-    answer="".join(result)
-    answer=int(answer)
-    return answer
+    return int(answer)
