@@ -1,22 +1,29 @@
 import sys
-sys.setrecursionlimit(10**9)
+
+sys.setrecursionlimit(int(1e9))
 input = sys.stdin.readline
 
-n = int(input())
-tree = [[] for _ in  range(n + 1)]
+N=int(input())
+graph=[[] for _ in range(N+1)]
 
-for i in range(2, n + 1):
-    type, amount, root = input().split()
-    amount, root = int(amount), int(root)
-    if type == 'W':
-        amount = -amount
-    tree[root].append((i, amount))
+for i in range(2,N+1):
+    a,b,c=input().split()
+    b,c=int(b), int(c)
+    amount=b
 
-def dfs(x, amount):
-    for next, nextAmount in tree[x]:
-        tmp = dfs(next, nextAmount)
-        if tmp > 0:
-            amount += tmp
+    if a=='W':
+        amount = -b
+    graph[c].append((i,amount))
+
+def dfs(node,amount):
+    for n_node , n_amount in graph[node]:
+        temp=dfs(n_node,n_amount)
+
+
+        if temp>0:
+            amount+=temp
+
     return amount
 
-print(dfs(1, 0))
+print(dfs(1,0))
+
