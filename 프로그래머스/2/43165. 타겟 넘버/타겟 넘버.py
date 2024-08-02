@@ -1,18 +1,26 @@
-from collections import deque
 def solution(numbers, target):
-    answer = 0
-    start=0
-    directions=[1,-1]
-    index=0
-    q=deque()
-    q.append((numbers[0],start,index))
-    while(q):
-        node,cur,cur_index=q.popleft()
-        for i in range(2):
-            next_cur=cur+(node*directions[i])
-            if cur_index==len(numbers)-1 and next_cur == target:
+    global answer
+    answer=0
+    len_=len(numbers)
+    
+    
+    def dfs(idx,value):
+        global answer
+        if idx==len_ : # 종료 조건 
+            if value==target: # 문제 조건 
                 answer+=1
-            elif cur_index < len(numbers)-1 :
-                 q.append((numbers[cur_index+1],next_cur,cur_index+1))
+            return
+        
+        
+        dfs(idx+1,value+numbers[idx])
+        dfs(idx+1,value-numbers[idx])
+            
+            
+    
+    
+    dfs(0,0)
                 
+                
+    
+    
     return answer
