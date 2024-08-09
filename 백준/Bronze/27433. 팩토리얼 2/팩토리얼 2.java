@@ -1,22 +1,25 @@
 import java.io.*;
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int N = Integer.parseInt(br.readLine());
+        int x = Integer.parseInt(br.readLine());
 
         br.close();
-        System.out.println(factorial(N));
+        long result = factorial(x);
+        System.out.println(result);
+
+
     }
 
 
-    static long factorial(int n){
-        if (n <= 0){
+    public static long factorial(int num) {
+        if (num <= 0 ){
             return 1;
         }
 
-        return n*factorial(n-1);
+
+        return factorial(num-1)*num;
     }
+
 }
