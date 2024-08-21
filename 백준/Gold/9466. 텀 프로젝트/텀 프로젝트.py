@@ -1,30 +1,35 @@
 import sys
-sys.setrecursionlimit(111111) #충분한 재귀 깊이를 주어 오류를 예방
-
-
-def dfs(x):
+sys.setrecursionlimit(int(1e5+1))
+def dfs(node):
     global result
-    visited[x] = True
-    cycle.append(x) #사이클을 이루는 팀을 확인하기 위함
-    number = numbers[x]
-    
-    if visited[number]: #방문가능한 곳이 끝났는지
-        if number in cycle: #사이클 가능 여부
-            result += cycle[cycle.index(number):] #사이클 되는 구간 부터만 팀을 이룸
+    visited[node]=True # 방문처리
+    next_node=graph[node]
+    cycle.append(node)
+
+    if visited[next_node]:# 방문이 된 노드라면
+        if next_node in cycle : # 다음 노드가 사이클에 포함되어있다면은
+            result+=cycle[cycle.index(next_node) : ] # 싸이클이 시작되는 시점부터 끝까지 result에 더한다
         return
     else:
-        dfs(number)
+        dfs(next_node)
 
 
-for _ in range(int(input())):
-    N = int(input())
-    numbers = [0] + list(map(int, input().split()))
-    visited = [True] + [False] * N #방문 여부
-    result = []
-    
-    for i in range(1, N+1):
-        if not visited[i]: #방문 안한 곳이라면
-            cycle = []
-            dfs(i) #DFS 함수 돌림
-            
-    print(N - len(result)) #팀에 없는 사람 수
+
+
+
+T=int(input())
+for _ in range(T):
+    N=int(input())
+    graph=[-1]+list(map(int,input().split()))
+    visited = [False for _ in range(N + 1)] # 방문처리
+    result=[]
+
+    for i in range(1,N+1):
+        if not visited[i]:
+            cycle=[]
+            dfs(i)
+
+    print(N - len(result))
+
+
+
