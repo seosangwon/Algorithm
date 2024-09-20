@@ -1,56 +1,52 @@
+#이모티콘 플러스 서비스 가입자를 최대한 늘릴 것
+#이모티콘 판매액을 최대한 늘릴 것 
+
+# 각 이모티콘의 할인율을 설정해서 위 조건을 만족시켜 최적의 결과를 출력 할 것 
+#사용자가 하는일 
+#1. 할인율 넘는 이모티콘 다 삼 
+#2. 이모티콘 구매 비용이 제한 값을 넘기면은 서비스를 가입함 
+
+#시간복잡도 
+# 유저의 최대 수 100 , 이모티콘의 최대 수 7 , 할인율 [10,20,30,40]
+#4**7 * 100 = 2^14 * 100 -> 브루트포스 됨 
+
+
 def solution(users, emoticons):
     answer = []
-    len_e=len(emoticons)
-    visited=[False for _ in range(len_e)]
-    discount=[0 for _ in range(len_e)]
-    result=[]
+    n_e=len(emoticons)
+    n_u=len(users)
     
-    def dfs(idx,discount):
-        if idx==len_e:
-            cal(discount)
-           
-            return
+    comb_list=[]
+    def dfs_comb(n,li):
+        if n==n_e:
+            comb_list.append(li)
+            return 
         
+        for i in range(1,5):
+            dfs_comb(n+1,li+[i*10])
+        
+    dfs_comb(0,[])
     
-        visited[idx]=True # 방문처리 
-        for j in range(10,41,10):
-            discount[idx]=j
-            dfs(idx+1,discount)
-            discount[idx]=0
-        visited[idx]=False # 백트래킹 
-            
-
-    def cal(discount):
-        total=0
-        free_users=0
+    # (2**14) * (100) * (7)
+    results=[]
+    for comb in comb_list: # 할인 조합 
+        result=[0,0]
         for user in users:
-            fee=0
-            flag=False
-            for i in range(len_e): # 이모티콘 순회 
-                if user[0] <= discount[i]: # 할인율이 높으면 이모티콘을 삼
+            cost=0 # 구매 금액 
+            for i in range(n_e): # 이모티콘 순서 
+                if comb[i] >= user[0]: # 할인율 조건이 맞으면 산다 
+                    cost+=emoticons[i] * ((100-comb[i])/100)
                     
-                    fee+=emoticons[i]* (1 - discount[i]/100)
-                
-                if fee>=user[1]: # 계산 중에 이모티콘 플러스 서비스 가입 할 조건이 성사되면 
-                    free_users+=1
-                    flag=True
-                    break
-            if not flag: # 가입을 하지 않았다면은\
-                total+=int(fee)
-                
-        result.append([free_users,total])
-        return 
-                    
+            if user[1] <= cost:
+                result[0]+=1
+            else:
+                result[1]+=cost
+        results.append(result)
+    results.sort(key=lambda x : [-x[0],-x[1]])
     
+    answer=results[0]
     
-    
-    dfs(0,discount) # idx
-    result=sorted(result , key= lambda x : (-x[0] , -x[1]) )
-    answer=result[0]
-    
-    
-    
-    
+
     
     
     return answer
