@@ -1,6 +1,6 @@
 n=int(input())
 
-dp=[0 for _ in range(n+1)]
+dp=[0 for _ in range(n+2)]
 dp[1]=1
 
 if n==2:
