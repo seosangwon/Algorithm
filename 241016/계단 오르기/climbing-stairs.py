@@ -9,8 +9,9 @@ if n==2:
     print(1)
 
 else:
-    for i in range(3,n+1):
-        dp[i]+=dp[i-2]+1
-        dp[i]+=dp[i-3]+1
+    dp[3]=1
+    for i in range(4,n+1):
+        dp[i]+=dp[i-2]
+        dp[i]+=dp[i-3]
 
     print(dp[n])
