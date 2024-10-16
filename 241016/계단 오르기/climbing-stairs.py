@@ -11,7 +11,7 @@ if n==2:
 else:
     dp[3]=1
     for i in range(4,n+1):
-        dp[i]+=dp[i-2]
-        dp[i]+=dp[i-3]
+        dp[i]=(dp[i-2]+dp[i-3])
+        
 
     print(dp[n])
