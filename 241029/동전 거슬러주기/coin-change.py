@@ -17,4 +17,7 @@ for i in range(1,m+1): # 현재 금액
             dp[i]=min(dp[i],dp[i-coins[j]]+1)
 
 
-print(dp[-1])
+if dp[-1]==INF:
+    print(-1)
+else:
+    print(dp[-1])
