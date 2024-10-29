@@ -8,7 +8,8 @@ INF=int(1e9)
 dp=[INF]*(m+1)
 
 for coin in coins:
-    dp[coin]=1
+    if coin <= m:
+        dp[coin]=1
 
 
 for i in range(1,m+1): # 현재 금액 
