@@ -1,6 +1,14 @@
--- 코드를 입력하세요
-SELECT CAR_ID ,MAX(IF('2022-10-16' BETWEEN DATE_FORMAT(START_DATE,"%Y-%m-%d") AND 
-                   DATE_FORMAT(END_DATE,"%Y-%m-%d"),'대여중','대여 가능')) AS AVAILABILITY
-FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
-GROUP BY CAR_ID
-ORDER BY CAR_ID DESC
+#2022년 10월 16일에 대여중인 자동차는 대여중 , 대여중이지 않는 자동차는 대여 가능 
+#최근 날짜 판별하는 방법 : max 
+select car_id , 
+    case
+        when car_id in (select car_id 
+                       from CAR_RENTAL_COMPANY_RENTAL_HISTORY
+                        where "2022-10-16" between start_date and end_date
+                       ) then "대여중"
+        else "대여 가능"
+    end as AVAILABILITY
+
+from CAR_RENTAL_COMPANY_RENTAL_HISTORY
+group by car_id
+order by car_id desc
