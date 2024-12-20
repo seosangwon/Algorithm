@@ -1,31 +1,25 @@
 #시간복잡도 : O(nlogn)
+from collections import defaultdict
 n,k=map(int,input().split())
 nums=list(map(int,input().split()))
-hash_map={}
 answer=0
-min_num=min(nums)
-max_num=max(nums)
+hash_map=defaultdict(int)
 
-#전부 0으로 초기화
-for n in range(min_num , max_num+1):
-    hash_map[n]=0
-
-#딕셔너리에 갯수 추가 
 for n in nums:
     hash_map[n]+=1
 
-#중복 값 제거 
-nums_set=set(nums)
-
-for n in nums_set:
+for n in set(nums):
     r=k-n
-    if min_num <= r <= max_num:
+    if n==r: # 값이 같을 경우 
+        answer+=hash_map[n] * (hash_map[r]-1)
+    else:
         answer+=hash_map[n]*hash_map[r]
-    
-        
-    
+
 print(answer//2)
-        
+
+
+
+
     
         
 
