@@ -7,7 +7,7 @@ min_num=min(nums)
 max_num=max(nums)
 
 #전부 0으로 초기화
-for n in range(-10**9 , 10**9+1):
+for n in range(min_num , max_num+1):
     hash_map[n]=0
 
 #딕셔너리에 갯수 추가 
@@ -19,10 +19,12 @@ nums_set=set(nums)
 
 for n in nums_set:
     r=k-n
-    answer+=hash_map[n]*hash_map[r]
+    if min_num <= r <= max_num:
+        answer+=hash_map[n]*hash_map[r]
+    
         
     
-print(answer)
+print(answer//2)
         
     
         
