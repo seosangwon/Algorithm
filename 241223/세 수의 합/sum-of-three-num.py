@@ -15,14 +15,20 @@ for e1 in nums:
         
         if e1==e2 and e1==e3:
             result+=(v1 *(v2-1) * (v3-2))
+            print(1,e1,e2,e3)
         elif e1==e2 and e2!=e3:
             result+=(v1*(v2-1)*v3)
+            print(2,e1,e2,e3)
         elif e1==e3 and e2!=e3:
             result+=(v1*v2*(v3-1))
+            print(3,e1,e2,e3)
         elif e2==e3 and e1!=e2:
             result+=(v1*v2*(v3-1))
+            print(4,e1,e2,e3)
         elif e1!=e2 and e2!=e3:
             result+=(v1*v2*v3)
+            print(5,e1,e2,e3)
+
 
 print(result//12)
 
