@@ -10,9 +10,9 @@ for n in nums:
 
 result=0
 idx=0
-for e1 in nums:
-    idx+=1
-    for e2 in nums[idx:]:
+set_nums=set(nums)
+for e1 in set_nums:
+    for e2 in set_nums:
         e3=k-(e1+e2)
         v1,v2,v3 = hash_map[e1],hash_map[e2],hash_map[e3]
         
@@ -33,6 +33,6 @@ for e1 in nums:
             #print(5,e1,e2,e3)
 
 
-print(result//(12*len_))
+print(result//6)
 
  
