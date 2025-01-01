@@ -11,5 +11,5 @@ for _ in range(n):
         tree_map[cmd]+=1
 
 for k,v in tree_map.items():
-    value=round((v/n)*100,5)
+    value=round((v/n)*100,4)
     print(f"{k} {value:.4f}")
