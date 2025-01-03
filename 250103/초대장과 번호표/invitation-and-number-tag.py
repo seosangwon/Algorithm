@@ -38,11 +38,11 @@ for i in range(G):
 
 while q:
     num=q.popleft()
-
+    print(num)
     for g in people_groups[num]: # 그 사람이 속한 그룹의 초대가 안된 set을 하나씩 본다 
         no_invited=groups[g] 
-        # 만약 초대 안받은 그룹에 내가 있으면은 제거해준다 
-        if num in no_invited:
+        
+        if num in no_invited: # 만약 초대 안받은 그룹에 내가 있으면은 제거해준다 
             no_invited.remove(num)
 
         if len(no_invited)==1:
@@ -54,7 +54,7 @@ while q:
     
 
 
-print(answer)
+#print(answer)
 
 
         
