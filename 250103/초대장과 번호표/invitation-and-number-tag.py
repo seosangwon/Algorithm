@@ -23,22 +23,19 @@ for i in range(G):
     li=list(map(int,input().split()))
     first=li[1]
     people_groups[first].append(i)
-    
-    if invites[first]==False:
-        q.append(first)
-        invites[first]=True
-        answer+=1 # queue에 한번 들어간 사람은 초대 받은 사람 
 
-    for e in li[2:] :
+    for e in li[1:] :
         people_groups[e].append(i)
         groups[i].add(e) # 초대 못받은 set에 추가  (단 : 나중에 1번재로 초대 받은 멤버가 지금은 들어 갈 수 있다)
 
 
 #queue에 들어가있다는 것은 초대를 받았다는 것 
+q.append(1)
+invites[1]=True
 
 while q:
     num=q.popleft()
-    print(num)
+    answer+=1
     for g in people_groups[num]: # 그 사람이 속한 그룹의 초대가 안된 set을 하나씩 본다 
         no_invited=groups[g] 
         
@@ -50,11 +47,11 @@ while q:
             if invites[nip]==False: # 초대를 안받았다면 queue에 추가 
                 q.append(nip)
                 invites[nip]=True
-                answer+=1
+           
     
 
 
-#print(answer)
+print(answer)
 
 
         
