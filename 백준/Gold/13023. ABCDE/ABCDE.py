@@ -1,32 +1,31 @@
-import sys
+# 5명의 친구 관계가 얽혀있는지 확인하는 문제
+# 양방향으로 친구를 저장 : 인접리스트
+N,M=map(int,input().split())
+friends=[[] for _ in range(N)]
 
-input = sys.stdin.readline
-sys.setrecursionlimit(10000)
+for _ in range(M):
+    a,b=map(int,input().split())
+    friends[a].append(b)
+    friends[b].append(a)
 
-n, m = map(int, input().split())
-graph = [[] for _ in range(n)]
-visited = [False] * n
+visited=[False] * N
+def dfs(x,cnt): # x는 사람 , cnt는 누적 친구 수
 
-for _ in range(m):
-    start, end = map(int, input().split())
-    graph[start].append(end)
-    graph[end].append(start)
-
-def dfs(start, depth):
-    if depth == 5:
-        return 1
-    visited[start] = True
-    for i in graph[start]:
-        if not visited[i]:
-            if dfs(i, depth + 1):
-                return 1
-    visited[start] = False
-    return 0
-
-for i in range(n):
-    visited = [False] * n  # 방문 배열 초기화
-    if dfs(i, 1):
+    # 종료조건
+    if cnt==5:
         print(1)
-        break
-else:
-    print(0)
+        exit() # 프로그램 종료
+
+    for other in friends[x]:
+        if not visited[other]: # 방문을 안한 친구라면은
+            visited[other]=True
+            dfs(other,cnt+1)
+            visited[other]=False
+
+
+for i in range(N):
+    visited[i]=True
+    dfs(i,1)
+    visited[i]=False
+
+print(0)
