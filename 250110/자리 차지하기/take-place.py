@@ -14,6 +14,7 @@ for e in a:
         answer+=1
         s.remove(s[idx])
     else:
-        print(answer)
         break
+
+print(answer)
     
