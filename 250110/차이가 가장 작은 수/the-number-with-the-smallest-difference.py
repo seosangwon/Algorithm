@@ -18,6 +18,9 @@ for e in arr[1:]:
         answer=min(answer,l_value)
     s.add(e)
 
+if answer==int(1e9):
+    ansewr=-1
+
 print(answer)
 
 
