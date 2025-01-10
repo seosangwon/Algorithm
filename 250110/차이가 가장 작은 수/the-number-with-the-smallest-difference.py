@@ -19,7 +19,7 @@ for e in arr[1:]:
     s.add(e)
 
 if answer==int(1e9):
-    ansewr=-1
+    answer=-1
 
 print(answer)
 
