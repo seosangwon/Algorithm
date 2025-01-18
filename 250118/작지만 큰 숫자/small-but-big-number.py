@@ -2,7 +2,7 @@ from sortedcontainers import SortedSet
 n, m = map(int, input().split())
 sequence = list(map(int, input().split()))
 query = list(map(int, input().split()))
-s=SortedSet(suquence)
+s=SortedSet(sequence)
 
 # Write your code here!
 
@@ -12,7 +12,7 @@ for x in query:
 
     if idx>0:
         print(s[idx])
-        remove(s[idx])
+        s.remove(s[idx])
     else:
         print(-1)
 
