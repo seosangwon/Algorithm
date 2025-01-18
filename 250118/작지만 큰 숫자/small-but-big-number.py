@@ -8,11 +8,13 @@ s=SortedSet(sequence)
 
 for x in query:
     idx=s.bisect_left(x)
-    idx-=1
-
-    if idx>0:
+    
+    if s[idx]==x:
         print(s[idx])
         s.remove(s[idx])
+    elif idx>0:
+        print(s[idx-1])
+        s.remove(s[idx-1])
     else:
         print(-1)
 
