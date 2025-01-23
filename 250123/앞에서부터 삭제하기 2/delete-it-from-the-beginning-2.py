@@ -16,7 +16,7 @@ for i in range(N-2,0,-1):
     sum_val+=arr[i] 
     min_v = q[0] # 현재 힙큐의 최솟 값 
 
-    max_val=max(max_val , (sum_val - min_v) // (N-i-1) )
+    max_val=max(max_val , (sum_val - min_v) / (N-i-1) )
 
 print("{:.2f}".format(max_val))
 
