@@ -6,30 +6,25 @@ arr = list(map(int, input().split()))
 # arr 순회 : O(N)
 # log(N)으로 평균 값 계산 
 answer=-int(1e9)
+q=[]
+sum_val=arr[N-1]
+max_val=-int(1e9)
+heapq.heappush(q,arr[N-1])
 
-sum_=sum(arr)
-prefix_sum=[0] * N
-prefix_sum[0]=arr[0]
-for i in range(1,N):
-    prefix_sum[i]+=prefix_sum[i-1]+arr[i]
+for i in range(N-2,0,-1):
+    heapq.heappush(q,arr[i]) # k개가 제거되고 난 후의 바로 오는 값을 heapq에 넣는다 
+    sum_val+=arr[i] 
+    min_v = q[0] # 현재 힙큐의 최솟 값 
 
-need_sum=[0]*N
+    max_val=max(max_val , (sum_val - min_v) // (N-i-1) )
 
-for i in range(N):
-    need_sum[i]=sum_ - prefix_sum[i]
-
-#print(need_sum)
-for i in range(1,N-1): # k는 1 ~ N-2
-    q=arr[i:]
-    heapq.heapify(q)
-    min_v = heapq.heappop(q)
-    #print(f"q : {q} , min_v : {min_v} , need_sum: {need_sum}")
-    value = ((need_sum[i-1]- min_v) // (N-i-1))
-    answer=max(answer , value)
-
-print("{:.2f}".format(answer))
+print("{:.2f}".format(max_val))
 
 
+
+
+    
+    
 
 
 
