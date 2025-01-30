@@ -5,6 +5,8 @@
 # 5. 최고 오래 기다린 시간 갱신 
 # 6. 대기 큐에 더 이상 사람이 없으면 실행 종료 
 
+# trouble : 입장 시각이 cur_time 보다 늦는경우 
+
 import heapq
 from collections import deque
 N=int(input())
@@ -24,11 +26,12 @@ heapq.heappush(s_q,[f_idx , f_start]) # 첫번째 사람 대기열에 넣기
 cur_time=f_start
 answer=0
 
-
+#debug=[]
 
 while s_q: # 대기 큐에 더이상 대기자가 없으면 종료 
     cur_idx , cur_start = heapq.heappop(s_q)
     answer=max(answer , (cur_time-cur_start))
+    debug.append((cur_idx,cur_time - cur_start))
     cur_time+=t[cur_idx] # 소요 시간 더해주기 
 
     del_count=0
@@ -43,11 +46,16 @@ while s_q: # 대기 큐에 더이상 대기자가 없으면 종료
     for _ in range(del_count):
         a.popleft()
     
+    if a and not s_q : # trouble
+        a_time , idx = a.popleft()
+        cur_time=a_time 
+        heapq.heappush(s_q,[idx,a_time])
+    
     
 
 print(answer)
 
-
+#print(debug)
 
 
 
