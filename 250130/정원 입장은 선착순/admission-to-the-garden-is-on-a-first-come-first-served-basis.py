@@ -31,7 +31,7 @@ answer=0
 while s_q: # 대기 큐에 더이상 대기자가 없으면 종료 
     cur_idx , cur_start = heapq.heappop(s_q)
     answer=max(answer , (cur_time-cur_start))
-    debug.append((cur_idx,cur_time - cur_start))
+    #debug.append((cur_idx,cur_time - cur_start))
     cur_time+=t[cur_idx] # 소요 시간 더해주기 
 
     del_count=0
