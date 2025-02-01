@@ -75,4 +75,4 @@ for k in range(1,101):
 answer.sort(key=lambda x : [-x[0] , x[1]]) # safe_zone의 개수가 크고 k는 작은 순서 
     
 #print(answer)
-print(answer[0][0],answer[0][1])
+print(answer[0][1],answer[0][0])
