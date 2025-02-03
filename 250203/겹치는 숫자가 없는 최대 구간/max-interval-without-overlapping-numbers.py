@@ -13,8 +13,12 @@ while left<=right and right<n-1:
     right+=1
     
     if arr[right] in count_arr: # 있으면은 left 값 제거 
-        count_arr.popleft()
-        left+=1
+        idx=count_arr.index(arr[right]) # 중복된 원소에 idx 찾기 
+        
+        for i in range(idx+1):
+            count_arr.popleft()
+            left+=1
+        
     
     else:
         answer=max(answer , right-left+1)
