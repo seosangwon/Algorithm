@@ -15,7 +15,10 @@ except:
     print(i,j,A[i])
 
 
-print(dp[-1])
+if dp[-1]==INF:
+    print(-1)
+else:
+    print(dp[-1])
         
 
             
