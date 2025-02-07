@@ -7,7 +7,11 @@ query = list(map(int, input().split()))
 for x in query:
     idx=bisect.bisect_left(arr,x)
     #print(f"x : {x},idx : {idx} , arr[idx+1]:{arr[idx+1]}")
-    if  idx <n-1 and x==arr[idx] :
+    if idx < n-1:
+        print(-1)
+        continue
+
+    if  x==arr[idx] :
         print(idx+1)
-    if idx==(n-1) or x!=arr[idx] :
+    if  x!=arr[idx] :
         print(-1)
