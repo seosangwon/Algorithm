@@ -1,7 +1,7 @@
 s = int(input())
 
 # Write your code here!
-right=int(1e9)
+right=int(1e18)
 left=1
 
 answer=[]
