@@ -8,7 +8,7 @@ right=int(1e9)
 answer=right
 
 def is_possible(k):
-    cnt= k - (k//3+k//5+k//15)
+    cnt= k - (k//3+k//5 - k//15)
 
     return cnt
 
