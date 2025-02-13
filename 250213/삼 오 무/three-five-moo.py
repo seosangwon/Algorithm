@@ -1,3 +1,4 @@
+import sys
 N = int(input())
 
 # N번째로 적히는 숫자를 출력한다 
