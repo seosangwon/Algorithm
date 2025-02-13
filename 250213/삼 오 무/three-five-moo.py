@@ -2,10 +2,11 @@ N = int(input())
 
 # N번째로 적히는 숫자를 출력한다 
 # 순회하는 방법은 O(N)
+INT_MAX = sys.maxsize
 left=1
-right=int(1e9)
+right=INT_MAX
 
-answer=right
+answer=INT_MAX
 
 def is_possible(k):
     cnt= k - (k//3+k//5 - k//15)
