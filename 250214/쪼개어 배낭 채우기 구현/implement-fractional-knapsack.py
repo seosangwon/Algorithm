@@ -14,6 +14,8 @@ for i in range(N):
 cur_m=0
 answer=0
 while cur_m<M:
+    if not q:
+        break
     t,i=heapq.heappop(q) # 가치가 제일 높은 보석 꺼내기
     #print(f"cur_m :{cur_m} , answer:{answer}")
     if M-cur_m >= w[i]: # 보석을 전부 담을 수 있다면은 
