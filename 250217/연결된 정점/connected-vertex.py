@@ -20,7 +20,7 @@ def union(n1,n2):
         counts[r_n1]+=counts[r_n2]
         counts[r_n2]=0
     
-    else:
+    if r_n2 < r_n1:
         parent_node[r_n1]=r_n2
         counts[r_n2]+=counts[r_n1]
         counts[r_n1]=0
