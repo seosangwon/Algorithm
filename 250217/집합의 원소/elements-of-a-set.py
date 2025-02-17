@@ -18,7 +18,7 @@ def union(n1,n2):
     r_n1= find(n1)
     r_n2= find(n2)
     if r_n1 < r_n2:
-        parent_node[n2]=r_n1
+        parent_node[r_n2]=r_n1
         
 
 
