@@ -35,6 +35,9 @@ def dfs(node):
     is_leaf=True
 
     for edge in edges[node]:
+        if is_deleted[edge]:
+            continue
+        
         is_leaf=False
         dfs(edge)
     
