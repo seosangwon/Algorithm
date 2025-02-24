@@ -1,6 +1,8 @@
 # 트리의 지름 : 임의의 노드 2개 선택시 , 거리가 가장 멀면 지름
 # 1. 아무 노드에서 dfs를 실행하여 가장 거리가 먼 노드를 구한다 
 # 2. 가장 거리가 먼 노드에서 dfs를 실행하여 가장 먼 거리를 구한다 
+import sys
+sys.setrecursionlimit(int(1e6))
 
 n=int(input())
 edges=[[] for _ in range(n+1)]
