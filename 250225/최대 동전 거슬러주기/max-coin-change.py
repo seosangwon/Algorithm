@@ -13,7 +13,9 @@ coin_max=max(coin)
 
 for i in range(coin_max+1,M+1):
     for j in range(N):
-        
+        if dp[i-coin[j]]==0:
+            continue 
+            
         dp[i]=max(dp[i],(dp[i-coin[j]]+1))
 
 if dp[M]==0:
