@@ -18,4 +18,8 @@ for i in range(1,M+1):
             
             dp[i]=max(dp[i],dp[i-coin[j]]+1)
 
-print(dp[M])
+
+if dp[M]==INT_MIN:
+    print(-1)
+else:
+    print(dp[M])
