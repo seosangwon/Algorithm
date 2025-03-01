@@ -63,17 +63,17 @@ def dfs(node):
 def is_root():
     root_node = find_root(in_edges)
     if root_node== -1: # 루트 노드가 여러개 
-        print("루트 노드 여러개 ")
-        print(in_edges)
+        # print("루트 노드 여러개 ")
+        # print(in_edges)
         return 0
     
     if not dfs(root_node): # 사이클 존재 
-        print("사이클 존재")
+        # print("사이클 존재")
         return 0 
 
     
     if False in visited[1:] : # 모든 노드 존재 방문 
-        print("모든 노드 방문 x ")
+        # print("모든 노드 방문 x ")
         return 0 
     
     
