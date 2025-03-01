@@ -1,100 +1,71 @@
+MAX_N = 10000
+
+# 변수 선언 및 입력:
 m = int(input())
-edges=[]
-# 트리 판별 요건 : 사이클이 없는지 확인 , 루트 노드에서 모든 노드로 이동 할 수 있는지 확인 
+root = 0
+deg = [0] * (MAX_N + 1)
+edges = [[] for _ in range(MAX_N + 1)]
+used = [False] * (MAX_N + 1)
+visited = [False] * (MAX_N + 1)
+is_tree = True
 
-# 1. 루트 노드 찾기 
-# 2. dfs로 전체 순회 
-# 3. 사이클이 발생하면은 return 0 
-# 4. dfs 종료 후 , 모든 노드가 방문 처리 되어 있다면은 return 1 
-
-# 루트 노드 찾기 
-max_node=-1
-
+# n개의 간선 정보를 입력받습니다.
 for _ in range(m):
-    s,e=map(int,input().split())
-    edges.append([s,e])
-    max_node=max(max_node , s, e )
+    x, y = tuple(map(int, input().split()))
 
-in_edges=[[] for _ in range(max_node+1)]
-out_edges=[[] for _ in range(max_node+1)]
-for s,e in edges:
-    in_edges[e].append(s)
-    out_edges[s].append(e)
+    # 간선 정보를 인접리스트에 넣어줍니다.
+    edges[x].append(y)
 
-def find_root(in_edges):
-    root_node=-1
-    cnt=0
-    for i in range(1,max_node+1):
-        if len(in_edges[i])==0:
-            root_node=i 
-            cnt+=1
-        if cnt>=2:
-            break 
-    
-    if cnt>=2:
-        return -1 
-    
-    return root_node
+    # 해당 번호가 그래프에 있는 정점 번호인지 판단합니다.
+    used[x] = True
+    used[y] = True
+
+    # 정점 별 들어오는 간선의 개수를 저장합니다.
+    deg[y] += 1
 
 
-visited=[False]*(max_node+1)
-flag=True
+# DFS를 통해 루트로부터 갈 수 있는 모든 정점을 탐색합니다.
+def dfs(x):
+    for y in edges[x]:
+        # 이미 방문한 노드는 스킵합니다.
+        if visited[y]: 
+            continue
 
-def dfs(node):
-    global flag
-    visited[node]=True  # 노드 방문 처리 
+        visited[y] = True  
+        dfs(y)
 
-    for next_node in out_edges[node]:
-        if visited[next_node]: # 만약 방문이 이미 되어있다면 경로가 유일하지 않은 것 
-            flag=False 
-
-        
-        if not visited[next_node]:
-            dfs(next_node)
-    
-    return flag
-        
-        
-
-            
+    return
 
 
+# 루트 노드를 찾습니다. 들어오는 간선이 하나도 없는 노드가 여러개면 트리가 아닙니다.
+for i in range(1, MAX_N + 1):
+    if used[i] and deg[i] == 0:
+        # 이미 선정된 루트가 있다면 
+        # 루트가 여러 개인 것이므로 트리가 아닙니다.
+        if root != 0: 
+            is_tree = False
+        root = i
 
-def is_root():
-    root_node = find_root(in_edges)
-    if root_node== -1: # 루트 노드가 여러개 
-        # print("루트 노드 여러개 ")
-        # print(in_edges)
-        return 0
-    
-    if not dfs(root_node): # 사이클 존재 
-        # print("사이클 존재")
-        return 0 
+# 루트 노드가 없으면 트리가 아닙니다.
+if root == 0: 
+    is_tree = False
 
-    
-    if False in visited[1:] : # 모든 노드 존재 방문 
-        # print("모든 노드 방문 x ")
-        return 0 
-    
-    
-    return 1 
+# 루트 노드를 제외한 노드는 모두 들어오는 간선이 1개씩 있습니다. 그렇지 않으면 트리가 아닙니다.
+for i in range(1, MAX_N + 1):
+    if used[i] and i != root and deg[i] != 1:
+        is_tree = False
 
+if is_tree and root != 0:
+    # root 정점으로부터 모든 정점을 갈 수 있는지 판단합니다.
+    visited[root] = True
+    dfs(root)
 
-print(is_root())
+# root 정점으로부터 탐색해 도달하지 못하는 정점이 있으면 트리가 아닙니다.
+for i in range(1, MAX_N + 1):
+    if used[i] and not visited[i]:
+        is_tree = False
 
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-
+if is_tree: 
+    print(1)
+else:
+    print(0)
