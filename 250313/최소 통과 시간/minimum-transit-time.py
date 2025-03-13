@@ -26,6 +26,6 @@ while left<=right:
     else:
         left=time+1
 
-print(time)
+print(left)
 
 
