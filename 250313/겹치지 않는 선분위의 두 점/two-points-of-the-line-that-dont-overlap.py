@@ -7,8 +7,13 @@ segments = [tuple(map(int, input().split())) for _ in range(M)]
 left=0
 right=int(sys.maxsize)
 
-max_line = max(segments[-1])
-min_line=min(segments[0])
+max_line = -int(1e9)
+min_line=int(1e9)
+
+for a,b in segments:
+    max_line=max(max_line,b)
+    min_line=min(min_line,a)
+
 is_line=[False]*(max_line +1 )
 
 for a,b in segments:
