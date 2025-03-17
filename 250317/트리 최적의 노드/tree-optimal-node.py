@@ -3,6 +3,8 @@
 # 2. 그 노드로부터 가장 먼 거리 값을 찾는다 
 
 # 각 노드별로 1번씩 실행 (1e5) X dfs 로직 내에서 각 노드별로의 거리를 구해야함 (1e5)
+import sys
+sys.setrecursionlimit(int(1e6))
 
 n = int(input())
 visited=[False]*(n+1)
