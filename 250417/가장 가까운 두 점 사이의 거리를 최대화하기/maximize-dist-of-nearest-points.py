@@ -22,19 +22,15 @@ MAX_NUM=1e9
 #             return False 
 #     return True 
 
-def is_possible(dist):
-    cnt=0
-    last_x= - MAX_NUM
-    for a,b in lines:
-        while last_x + dist <=b :
-            cnt+=1
-            last_x=max(a,last_x+dist)
 
-            if cnt>=N:
-                break
+def is_possible(mid):
+    curr_x, _ = lines[0]            # 최적의 점의 위치를 구해줍니다.
+    for x1, x2 in lines[1:]:
+        if x2 < curr_x + mid:          # 최소 거리를 더했는데 구간을 벗어난다면
+            return False               # 불가능한 경우입니다.
+        curr_x = max(curr_x + mid, x1) # 최적의 점의 위치를 갱신합니다.
     
-    return cnt>=N 
-
+    return True  
 
 while left<=right:
     mid=(left+right)//2
