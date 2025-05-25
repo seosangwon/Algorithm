@@ -1,34 +1,32 @@
-#각 폭탄은 1시간의 해체시간이 걸린다
-# N의 최대 개수는 10,000
-# 점수 _ 시간제한
-# 시간제한이 넘으면 폭탄은 터진다 
-
-#힙큐사용 (제한시간 , - 점수)
-
 import heapq
 
-N=int(input())
-hq=[]
+MAX_T=10000
 
-for _ in range(N):
-    p,t=map(int,input().split(" "))
-    heapq.heappush(hq,(t,-p))
+n=int(input())
+bombs=[]
+
+for _ in range(n):
+    score,time_limit=map(int,input().split(" "))
+    bombs.append((time_limit,score))
+
+def get_time_limit(bomb_idx):
+    return bombs[bomb_idx][0]
+
+def get_score(bomb_idx):
+    return bombs[bomb_idx][1]
+
+bombs.sort()
+pq=[]
+bomb_idx=n-1
+ans=0
 
 
-c_time=0
-answer=0
-
-while hq:
-    bomb_t,bomb_p=heapq.heappop(hq)
+for t in range(MAX_T , 0, -1):
+    while bomb_idx >=0 and get_time_limit(bomb_idx)>=t:
+        heapq.heappush(pq,-get_score(bomb_idx))
+        bomb_idx-=1
     
-    if c_time >= bomb_t:
-        continue 
-    
-    #폭탄헤제 
-    c_time+=1
-    answer+=bomb_p
+    if pq:
+        ans+=-heapq.heappop(pq)
 
-print(-answer)
-
-
-
+print(ans)
