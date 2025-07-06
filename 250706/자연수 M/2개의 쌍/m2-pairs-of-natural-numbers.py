@@ -10,7 +10,7 @@ ans=0
 
 for _ in range(N):
     x,y=map(int,input().split())
-    nums.append((y,x))
+    nums.append([y,x])
 
 nums.sort()
 
