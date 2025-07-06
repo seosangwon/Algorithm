@@ -22,12 +22,12 @@ while li<=ri:
     ans=max(ans,nums[li][0]+nums[ri][0])
 
     if nums[li][1] > nums[ri][1]:
-        ri-=1
         nums[li[1]]-=nums[ri][1]
+        ri-=1
     
     elif nums[li][1] < nums[ri][1]:
-        li+=1
         nums[ri][1]-=nums[li][1]
+        li+=1
     else:
         ri-=1
         li+=1
