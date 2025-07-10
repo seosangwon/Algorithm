@@ -1,69 +1,49 @@
-# 모듈1 : 금 채굴 - K칸만 갈 수 있는 bfs로 계산 
-# 모듈2 : 마름모 계산
+from collections import deque
 
+n, m = map(int, input().split())
+grid = [list(map(int, input().split())) for _ in range(n)]
 
-#M은 금 가격
-from collections import deque 
-N,M = map(int,input().split())
-data=[]
-answer=0
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
 
-dx=[1,-1,0,0]
-dy=[0,0,1,-1]
+def get_area(k):
+    return k * k + (k + 1) * (k + 1)
 
+def bfs(x, y, k):
+    visited = [[False] * n for _ in range(n)]
+    q = deque()
+    q.append((x, y, 0))  # (x좌표, y좌표, 현재 거리)
+    visited[x][y] = True
 
-
-#k 만큼의 거리 까지만 탐지 가능 
-def get_value(x,y,k,d): # d는 현재 거리
-    visited=[[False]*N for _ in range(N)]
-    q=deque([(x,y,d)])  
-    visited[x][y]=True
-    gold_cnt=data[x][y] # 현재 가치 
-
-    if k==0:
-        return (gold_cnt,gold_cnt * M)
+    gold = grid[x][y]  # 시작점의 금
 
     while q:
-        x,y,d=q.popleft()
+        cx, cy, dist = q.popleft()
 
-        if d>k: 
-            continue 
+        if dist == k:
+            continue  # k 초과 금지
 
         for i in range(4):
-            nx=x+dx[i]
-            ny=y+dy[i]
+            nx = cx + dx[i]
+            ny = cy + dy[i]
 
-            if 0<=nx<N and 0<=ny<N and visited[nx][ny]==False:
-                gold_cnt+=data[nx][ny]
-                visited[nx][ny]=True
-                q.append((nx,ny,d+1))
-    
-    return (gold_cnt,gold_cnt*M)
-        
+            if 0 <= nx < n and 0 <= ny < n and not visited[nx][ny]:
+                if abs(nx - x) + abs(ny - y) <= k:  # 혹시라도 우회한 경로로 k 초과했을 경우 방지
+                    visited[nx][ny] = True
+                    q.append((nx, ny, dist + 1))
+                    gold += grid[nx][ny]
 
+    return gold
 
+max_gold = 0
 
+# 각 위치를 중심으로 k 범위 탐색
+for x in range(n):
+    for y in range(n):
+        for k in range(2 * n):  # 넉넉하게 잡기
+            gold_count = bfs(x, y, k)
+            cost = get_area(k)
+            if gold_count * m >= cost:
+                max_gold = max(max_gold, gold_count)
 
-for _ in range(N):
-    data.append(list(map(int,(input().split(" ")))))
-
-debug_x,debug_y=0,0
-max_value=0
-#손해를 보지 않고 채굴해야함
-for k in range(N*2+1):
-    for i in range(N):
-        for j in range(N):
-            gold_cnt,gold_value = get_value(i,j,k,0)
-            k_value=k**2+(k+1)**2
-            value=gold_value-k_value
-            if max_value < value:
-                answer=gold_cnt
-
-
-        
-print(answer)
-#print(debug_x,debug_y)
-
-
-
- 
+print(max_gold)
