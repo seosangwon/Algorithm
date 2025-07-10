@@ -50,7 +50,7 @@ for _ in range(N):
 debug_x,debug_y=0,0
 max_value=0
 #손해를 보지 않고 채굴해야함
-for k in range(N*2):
+for k in range(N*2+1):
     for i in range(N):
         for j in range(N):
             gold_cnt,gold_value = get_value(i,j,k,0)
