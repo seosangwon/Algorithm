@@ -13,7 +13,10 @@ for i in range(1000001):
     prefix_sum[i]+=prefix_sum[i-1]
 
 for s,e in ranges:
-    print(prefix_sum[e]-prefix_sum[s-1])
+    if s==0:
+        print(prefix_sum[e])
+    else:
+        print(prefix_sum[e]-prefix_sum[s-1])
 
 
 
