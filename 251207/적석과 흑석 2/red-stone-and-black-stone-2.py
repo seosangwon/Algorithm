@@ -2,8 +2,11 @@
 # 시간제한 4초 
 # C,N이 최대 1e5이므로 최소 ClongN
 # 1. 2중 탐색 - O(N^2) X , 2.    
-# 빨간공 제일 값이 작은거 부터 처리한다.
-# 1. 검은공 순차탐색 2. 조건에 충족한 빨간공이 있으면 +1 3. 조건에 충족한 빨간공이 없으면 빨간공 큐에서 제거 
+# 1.빨간공을 오름차순으로 순차탐색 
+# 2.조건에 충족하는 검은공을 heapq에 넣는다.
+# 3. heapq에서 b의 값이 가장 낮은 값을 꺼낸다. 
+
+
 
 import heapq
 
@@ -15,34 +18,58 @@ for _ in range(C):
     red=int(input())
     red_q.append(red)
 
+
 for _ in range(N):
     a,b=map(int,input().split(" "))
-    black_q.append((a,b))
+    heapq.heappush(black_q,(a,b))
 
-black_q.sort(key=lambda x: (x[0],x[1]))
-heapq.heapify(red_q)
+red_q.sort()
 answer=0
+hq=[]
 
-for a,b in black_q:
+# sol
+for red in red_q:
+    
+    # 조건에 충족하는 검정돌을 heapq에서 꺼내 heapq에 넣는다.
+    while black_q:
+        a=black_q[0][0]
+        b=black_q[0][1]
 
-    while red_q:
+        if a<=red<=b:
+            heapq.heappush(hq,(b,a))
+            heapq.heappop(black_q)
         
-        if red_q[0] > b: # red중에 제일 작은 값인데 b 보다 커버리면 이 후 원소들 모두 조건 불충족 
-            break
+        if red < a:
+            break 
+    
+    # heapq에서 가장 b 값이 낮은 원소를 꺼낸다. 
+    while hq and hq[0][0] < red:
+        heapq.heappop(hq)
+    
+    if hq:
+        answer+=1
+        heapq.heappop(hq)
 
-        if red_q[0] < a :  # 조건 미충족시 원소 제거 후 다시 로직을 탄다.
-            heapq.heappop(red_q)
-            continue 
-        
-        if a<=red_q[0]<=b: # 조건 충족시 원소 제거 후 break
-            answer+=1
-            heapq.heappop(red_q)
-            break
-        
+
+    
+            
 
 print(answer)
-        
-        
+
+    
+
+
+
+
+
+
+
+
+    
+
+    
+
+
 
 
 
