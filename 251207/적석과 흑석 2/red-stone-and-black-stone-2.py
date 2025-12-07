@@ -31,16 +31,22 @@ hq=[]
 for red in red_q:
     
     # 조건에 충족하는 검정돌을 heapq에서 꺼내 heapq에 넣는다.
-    while black_q:
-        a=black_q[0][0]
-        b=black_q[0][1]
 
-        if a<=red<=b:
-            heapq.heappush(hq,(b,a))
-            heapq.heappop(black_q)
+    while black_q and black_q[0][0] <= red:
+        a, b = heapq.heappop(black_q)
+        if red <= b:
+            heapq.heappush(hq, (b, a))  # b가 작은 구간이 우선
+
+    # while black_q:
+    #     a=black_q[0][0]
+    #     b=black_q[0][1]
+
+    #     if a<=red<=b:
+    #         heapq.heappush(hq,(b,a))
+    #         heapq.heappop(black_q)
         
-        if red < a:
-            break 
+    #     if red < a:
+    #         break 
     
     # heapq에서 가장 b 값이 낮은 원소를 꺼낸다. 
     while hq and hq[0][0] < red:
