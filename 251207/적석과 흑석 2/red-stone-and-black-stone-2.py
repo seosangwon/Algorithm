@@ -31,6 +31,9 @@ for a,b in black_q:
     while red_q:
         red=red_q[0]*-1
 
+        if red<a: # red의 max 값이 a보다 작을 경우 그 밑의 원소들은 모두 충족하지 않음 
+            break 
+
         # 조건을 충족한다면 
         if a<=red<=b:
             answer+=1
