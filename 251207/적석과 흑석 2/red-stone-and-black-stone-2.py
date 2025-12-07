@@ -19,7 +19,7 @@ for _ in range(N):
     a,b=map(int,input().split(" "))
     black_q.append((a,b))
 
-black_q.sort(key=lambda x: -x[0])
+black_q.sort(key=lambda x: (-x[0],-x[1]))
 
 answer=0
 heapq.heapify(red_q)
@@ -31,7 +31,7 @@ for a,b in black_q:
     while red_q:
         red=red_q[0]*-1
 
-        if red<a: # red의 max 값이 a보다 작을 경우 그 밑의 원소들은 모두 충족하지 않음 
+        if red<a : # red의 max 값이 a보다 작다면  그 밑의 원소들은 모두 충족하지 않음 
             break 
 
         # 조건을 충족한다면 
@@ -39,10 +39,12 @@ for a,b in black_q:
             answer+=1
             heapq.heappop(red_q)
             break 
-        
-        #조건 미충족시 
-        else:
+
+        if a<=red and red>b:
             heapq.heappop(red_q)
+
+        
+                
 
 
 print(answer)
