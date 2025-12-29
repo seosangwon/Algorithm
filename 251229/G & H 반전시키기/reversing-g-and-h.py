@@ -3,14 +3,16 @@
 # a와 b를 비교하다가 다른 부분이 있으면 체크한다.
 
 N = int(input())
-a = input()
-b = input()
+a = list(input())
+b = list(input())
 answer=0
 flag=False # 연속을 체크하는 플래그 변수 
 
 for i in range(N):
-    if a[i]!=b[i] and !flag:
+    if a[i]!=b[i] and not flag:
         answer+=1
+        flag=True
+        
     
     if a[i]!=b[i] and flag:
         continue 
@@ -18,11 +20,6 @@ for i in range(N):
     
     if a[i]==b[i]:
         flag=False    
-    
-
-    
-    
-        
 
 print(answer)
 
