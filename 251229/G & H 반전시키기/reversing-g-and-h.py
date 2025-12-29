@@ -17,9 +17,7 @@ for i in range(N):
     if a[i]!=b[i] and flag:
         continue 
     
-    
-    if a[i]==b[i]:
-        flag=False    
+  
 
 print(answer)
 
