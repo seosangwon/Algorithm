@@ -1,11 +1,11 @@
-#대장균의 크기에 따라 분류하기 
-select id , 
-    case
-        when size_of_colony <= 100 then "LOW"
-        when 100<size_of_colony and size_of_colony<=1000 then "MEDIUM"
-        else "HIGH"
-    end 
-        as SIZE
-from ecoli_data
-order by id
+# 분기 
 
+SELECT ID,
+    CASE 
+        WHEN SIZE_OF_COLONY<=100 THEN 'LOW' 
+        WHEN 100<SIZE_OF_COLONY AND SIZE_OF_COLONY<=1000 THEN 'MEDIUM' 
+        WHEN SIZE_OF_COLONY>1000 THEN 'HIGH' 
+    END SIZE 
+FROM ECOLI_DATA
+ORDER BY ID
+       
