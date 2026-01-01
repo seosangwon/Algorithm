@@ -2,7 +2,7 @@
 # 전부 뒤집었을 때, 맨 마지막이 0이면 실패 
 
 n=int(input())
-arr=list(map(int,input().split(" ")))
+arr=list(map(int,input().split()))
 answer=0
 
 for i in range(1,n):
