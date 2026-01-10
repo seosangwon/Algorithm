@@ -23,6 +23,8 @@ def flip(x,n):
                     a[x+i]='H'
                 elif a[x+i]=='H':
                     a[x+i]='G'
+            elif a[x+i]==b[x+i]: # 안맞는게 생기면은 바로 끊어야 함 
+                break 
         
 
 
